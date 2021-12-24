@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Stmt\Global_;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use App\Models\Category;
 
 Route::get('/', function () {
     return view('blogs', [
-        'blogs'=>Blog::with('category')->get()
+        'blogs'=>Blog::with('category', 'author')->get()
     ]);
 });
 Route::get('/blogs/{blog:slug}', function (Blog $blog) {
@@ -30,5 +31,10 @@ Route::get('/blogs/{blog:slug}', function (Blog $blog) {
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('blogs', [
         'blogs'=> $category->blogs
+    ]);
+});
+Route::get('/users/{user:username}', function (User $user) {
+    return view('blogs', [
+        'blogs'=> $user->blogs
     ]);
 });
