@@ -11,11 +11,11 @@ class BlogController extends Controller
     public function index()
     {
         return view('blogs', [
-        'blogs'=> Blog::latest()->filter(request(['search']))->get(),
+        'blogs'=> Blog::latest()->filter(request(['search','category']))->get(),
         'categories'=>Category::all()
     ]);
     }
-    public function show(Blog $blog)
+    public function show(Blog  $blog)
     {
         return view('blog', [
             "blog"=>$blog,
