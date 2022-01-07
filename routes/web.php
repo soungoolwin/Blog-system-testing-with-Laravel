@@ -28,9 +28,9 @@ Route::get('/blogs/{blog:slug}', [BlogController::class,'show']);
 //         'currentCategory'=>$category
 //     ]);
 // });
-Route::get('/users/{user:username}', function (User $user) {
-    return view('blogs', [
-        'blogs'=> $user->blogs,
-        'categories'=>Category::all()
-    ]);
-});
+// Route::get('/users/{user:username}', function (User $user) {
+//     return view('blogs', [
+//         'blogs'=> $user->blogs,
+//         'categories'=>Category::all()
+//     ]);
+// });
