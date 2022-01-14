@@ -34,4 +34,5 @@
         <p class="text-center">No Blogs Found.</p>
         @endforelse
     </div>
+    {{$blogs->links()}}
 </section>
