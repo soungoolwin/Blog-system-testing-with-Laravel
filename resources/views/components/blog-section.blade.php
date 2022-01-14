@@ -12,6 +12,14 @@
         <div class="input-group mb-3">
             <input name="search" value="{{request('search')}}" type="text" autocomplete="false" class="form-control"
                 placeholder="Search Blogs..." />
+            @if (request('category'))
+            <input name="category" value="{{request('category')}}" type="hidden" autocomplete="false" />
+            @endif
+
+            @if (request('author'))
+            <input name="author" value="{{request('author')}}" type="hidden" autocomplete="false" />
+            @endif
+
             <button class="input-group-text bg-primary text-light" id="basic-addon2" type="submit">
                 Search
             </button>
