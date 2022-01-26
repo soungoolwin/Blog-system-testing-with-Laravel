@@ -20,7 +20,15 @@ class AuthController extends Controller
             'email'=>['required','email',Rule::unique('users', 'email')],
             'password'=>['required','max:30','min:5']
         ]);
-        User::create($formData);
-        return redirect('/');
+        $user=User::create($formData);
+        auth()->login($user);
+        session()->flash('success', 'Welcome Dear, '. $user->name);
+        return redirect('/')->with('success', 'Welcome Dear, '. $user->name);
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect('/')->with('success', 'Good Bye!!');
     }
 }

@@ -42,4 +42,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Blog::class);
     }
+
+    public function getNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password']= bcrypt($value);
+    }
 }
