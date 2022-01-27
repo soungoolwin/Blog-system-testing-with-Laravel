@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
@@ -48,5 +49,13 @@ class AuthController extends Controller
             'password.min'=>"Password must be more than 8 characters"
     ]
         );
+
+        if (Auth::attempt($formData)) {
+            return redirect('/')->with('success', 'Welcome Back');
+        } else {
+            return back()->withErrors([
+                'email'=>'User Credentials Wrong'
+            ]);
+        }
     }
 }
