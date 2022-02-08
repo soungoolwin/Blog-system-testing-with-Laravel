@@ -17,10 +17,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::truncate();
-        Blog::truncate();
-        Category::truncate();
-
         $frontend=Category::factory()->create(['name'=>'frontend','slug'=>'frontend']);
         $backend=Category::factory()->create(['name'=>'backend','slug'=>'backend']);
 
@@ -28,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $aungaung = User::factory()->create(['name'=>'aungaung','username'=>'aungaung']);
         Blog::factory(2)->create(['category_id'=>$frontend->id,'user_id'=>$mgmg->id ]);
         Blog::factory(2)->create(['category_id'=>$backend->id, 'user_id'=>$aungaung->id ]);
-        Comment::factory()->create(['body'=>"This is greate artivle",'user_id'=>$mgmg->id,'blog_id'=>'$frontend->id']);
-        Comment::factory()->create(['body'=>"This is bad article",'user_id'=>$aungaung->id,'blog_id'=>'$backend->id']);
+
+        Comment::factory(4)->create();
     }
 }
