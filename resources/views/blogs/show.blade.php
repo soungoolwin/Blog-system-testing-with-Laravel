@@ -15,6 +15,15 @@
                 class="text-white">{{$blog->category->name}}</span></a>
           </div>
           <div class="text_secondary">{{$blog->created_at->diffForHumans()}}</div>
+          <div class="text_secondary">
+            <form action="" method="POST">
+              @if (auth()->user()->isSubscribed($blog))
+              <button class="btn btn-danger">Unsubscribe</button>
+              @else
+              <button class="btn btn-warning">Subscribe</button>
+              @endif
+            </form>
+          </div>
         </div>
         <p class="lh-md mt-3">
           {{$blog->body}}
@@ -33,7 +42,7 @@
   </div>
   @endguest
 
-  <x-comment :comments="$blog->comments" />
+  <x-comment :comments="$blog->comments()->latest()->paginate(3)" />
   <x-subscribe />
   <x-blogs_you_may_like_section :randomBlogs="$randomBlogs" />
 

@@ -53,6 +53,11 @@ class User extends Authenticatable
     }
     public function subscribedBlogs()
     {
-        return $this->belongsToMany(Blog::class, "blog_user");
+        return $this->belongsToMany(Blog::class, "blog_user")->withPivot('created_at');
+    }
+
+    public function isSubscribed($blog)
+    {
+        return auth()->user()->subscribedBlogs && auth()->user()->subscribedBlogs->contains('id', $blog->id);
     }
 }
