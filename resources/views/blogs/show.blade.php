@@ -16,13 +16,16 @@
           </div>
           <div class="text_secondary">{{$blog->created_at->diffForHumans()}}</div>
           <div class="text_secondary">
-            <form action="" method="POST">
+            @auth
+            <form action="/blogs/{{$blog->slug}}/subscribe" method="POST">
+              @csrf
               @if (auth()->user()->isSubscribed($blog))
               <button class="btn btn-danger">Unsubscribe</button>
               @else
               <button class="btn btn-warning">Subscribe</button>
               @endif
             </form>
+            @endauth
           </div>
         </div>
         <p class="lh-md mt-3">
